@@ -1,7 +1,8 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    // include "two.js" to the bundle
+    entry: ['./src/index.js', './src/two.js'],
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname),

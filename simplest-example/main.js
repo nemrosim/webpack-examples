@@ -33,7 +33,11 @@
         return Object.prototype.hasOwnProperty.call(e, t)
     }, n.p = "", n(n.s = 0)
 }([function (e, t, n) {
-    n(1), document.write("Hello world")
+    n(1), e.exports = n(3)
+}, function (e, t, n) {
+    n(2), document.write("Hello world")
 }, function (e, t) {
     document.write("<h3>File 'one' imported</h3>")
+}, function (e, t) {
+    document.write("<h3>File 'two' imported</h3>")
 }]);
