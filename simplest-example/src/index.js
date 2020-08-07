@@ -1,3 +1,3 @@
-require('./one')
+import './one';
 
 document.write("Hello world");
