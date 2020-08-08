@@ -26,14 +26,9 @@ module.exports = {
     devServer: {
         /*
          * Where should 'webpack-dev-server' look for "index.html" file?
-         * In a '/public' folder
-         *
-         *  By default,
-         *  it will use your current working directory to serve content.
-         *  To disable contentBase set it to 'false'.
+         * In a '/build' folder
          */
-        contentBase: path.join(__dirname, 'build'),
-        compress: true,
+        contentBase: path.join(__dirname, 'build'), // this is "default" value
         port: 9000
     },
     /*
@@ -41,9 +36,7 @@ module.exports = {
      *  Re-run webpack script on each file change-save
      */
     watch: false,
-    /*
-     *  Babel. ES6 Loader
-     */
+
     plugins: [
         new HtmlWebpackPlugin({
             /*
@@ -54,9 +47,17 @@ module.exports = {
              *  'head' will place the scripts in the head element.
              */
             inject: false,
+            /*
+             *  Path to the index.html file
+             *  that should be "copied" to the
+             *  "/build" folder
+             */
             template: path.resolve(__dirname, 'public/index.html'),
         }),
     ],
+    /*
+     *  Babel. ES6 Loader
+     */
     module: {
         /*
          * In webpack v1 prop "rules" was called "loaders"
