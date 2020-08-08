@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     /*
@@ -21,7 +23,7 @@ module.exports = {
          *  - when user will request "/public/assets/js/bundle.js" file ("publicPath")
          *  - server will look it at "/build/bundle.js" path ("path")
          */
-        publicPath: '/public/assets/js'
+        publicPath: '/public/assets'
     },
     devServer: {
         /*
@@ -35,7 +37,7 @@ module.exports = {
      *  Same as "webpack --watch".
      *  Re-run webpack script on each file change-save
      */
-    watch: true,
+    watch: false,
     plugins: [
         new HtmlWebpackPlugin({
             /*
@@ -53,8 +55,13 @@ module.exports = {
              */
             template: path.resolve(__dirname, 'public/index.html'),
         }),
+        new MiniCssExtractPlugin({
+            filename: 'optimized-bundle.css', // any name you want
+        }),
     ],
-
+    optimization: {
+        minimizer: [new OptimizeCSSAssetsPlugin({})],
+    },
     /*
      *  Babel. ES6 Loader
      */
@@ -84,9 +91,28 @@ module.exports = {
                     }
                 }
             },
+            /*
+             *  !!! 1. Uncomment this
+             *  if you want CSS injected into the JS bundle.
+             *
+             */
+            // {
+            //     test: /\.css$/i,
+            //     use: ['style-loader', 'css-loader'],
+            // },
+
+            /*
+             * !!! 2. And comment this lines
+             */
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader',
+                ],
             },
         ],
     }
