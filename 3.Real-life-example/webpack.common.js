@@ -32,7 +32,9 @@ module.exports = {
          *  it will use your current working directory to serve content.
          *  To disable contentBase set it to 'false'.
          */
-        contentBase: 'public'
+        contentBase: path.join(__dirname, 'build'),
+        compress: true,
+        port: 9000
     },
     /*
      *  Same as "webpack --watch".
@@ -42,6 +44,19 @@ module.exports = {
     /*
      *  Babel. ES6 Loader
      */
+    plugins: [
+        new HtmlWebpackPlugin({
+            /*
+             *  true || 'head' || 'body' || false
+             *  Inject all assets into the given template or templateContent.
+             *  When passing true or 'body'
+             *  all javascript resources will be placed at the bottom of the body element.
+             *  'head' will place the scripts in the head element.
+             */
+            inject: false,
+            template: path.resolve(__dirname, 'public/index.html'),
+        }),
+    ],
     module: {
         /*
          * In webpack v1 prop "rules" was called "loaders"
