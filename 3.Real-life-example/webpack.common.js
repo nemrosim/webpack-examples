@@ -35,8 +35,7 @@ module.exports = {
      *  Same as "webpack --watch".
      *  Re-run webpack script on each file change-save
      */
-    watch: false,
-
+    watch: true,
     plugins: [
         new HtmlWebpackPlugin({
             /*
@@ -46,7 +45,7 @@ module.exports = {
              *  all javascript resources will be placed at the bottom of the body element.
              *  'head' will place the scripts in the head element.
              */
-            inject: false,
+            inject: true,
             /*
              *  Path to the index.html file
              *  that should be "copied" to the
